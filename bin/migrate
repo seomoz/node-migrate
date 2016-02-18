@@ -184,7 +184,8 @@ function create(name) {
  */
 
 function performMigration(direction, migrationName) {
-  var state = options.stateFile || join('migrations', '.migrate');
+  var nodeEnv = process.env.NODE_ENV || ''
+  var state = options.stateFile || join('migrations', '.migrate' +  '_' + nodeEnv + '.json');
   var set = migrate.load(state, 'migrations');
 
   set.on('migration', function(migration, direction){
