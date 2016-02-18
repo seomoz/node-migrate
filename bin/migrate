@@ -184,7 +184,10 @@ function create(name) {
  */
 
 function performMigration(direction, migrationName) {
-  var nodeEnv = process.env.NODE_ENV || ''
+  var nodeEnv = process.env.NODE_ENV
+  if (!nodeEnv) {
+    return abort("ERROR: NODE_ENV must be specified")
+  }
   var state = options.stateFile || join('migrations', '.migrate' +  '_' + nodeEnv + '.json');
   var set = migrate.load(state, 'migrations');
 
